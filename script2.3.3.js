@@ -1,25 +1,25 @@
 // Тестовые данные (информация из базы данных)
-let balance = 500;  // Баланс пользователя
-let packageCost = 100;  // Стоимость посылки
+let balance = 500; // Баланс пользователя
+let packageCost = 100; // Стоимость посылки
 
 // Код из смс, который вводит пользователь
-let smsCode = "A001DFX0";  // Код из смс, который должен совпасть с кодом из базы данных
+let smsCode = "A001DFX0"; // Код из смс, который должен совпасть с кодом из базы данных
 
 // Данные о посылках в базе данных
 let packageDatabase = {
-  "A001DFX0": // код из смс
-  {
-    id: "1432HGF",  // ID посылки
-    cellNumber: 4,  // Номер ячейки
-    cost: 100  // Стоимость посылки
-  }
+  // код из смс
+  A001DFX0: {
+    id: "1432HGF", // ID посылки
+    cellNumber: 4, // Номер ячейки
+    cost: 100, // Стоимость посылки
+  },
 };
 
 // Функция для получения посылки
 function receivePackage(smsCode) {
   // Проверяем, существует ли такой код в базе данных
   if (packageDatabase[smsCode]) {
-    let package = packageDatabase[smsCode];  // Получаем данные о посылке из базы данных
+    let package = packageDatabase[smsCode]; // Получаем данные о посылке из базы данных
 
     // Проверяем, хватает ли средств на балансе
     if (balance >= package.cost) {
@@ -27,7 +27,9 @@ function receivePackage(smsCode) {
       balance -= package.cost;
 
       // Выводим информацию о посылке
-      console.log(`Заберите посылку ${package.id} из ячейки №${package.cellNumber}. Ваш счет составляет: ${balance}ед.`);
+      console.log(
+        `Заберите посылку ${package.id} из ячейки №${package.cellNumber}. Ваш счет составляет: ${balance}ед.`
+      );
     } else {
       console.log("Недостаточно средств на балансе.");
     }
